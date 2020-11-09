@@ -1,0 +1,18 @@
+@import "~bootstrap/scss/functions";
+@import "./helpers/_var";
+@import "~bootstrap/scss/bootstrap";
+@import "./_dashboard";
+@import "./helpers/_loading";
+
+.table th,
+.table td {
+  vertical-align: inherit;
+}
+
+
+
+.active {
+  color: #2e6092 !important;
+  font-weight: bolder;
+  background-color: #f6f9fc !important;
+}

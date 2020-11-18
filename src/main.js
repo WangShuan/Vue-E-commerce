@@ -16,38 +16,38 @@ import router from './router'
 import VeeValidate from 'vee-validate'
 import './bus'
 
-VeeValidate.Validator.localize( 'zh_TW', zhTWValidate )
-Vue.use( veeValidate )
+VeeValidate.Validator.localize('zh_TW', zhTWValidate)
+Vue.use(veeValidate)
 
 Vue.config.productionTip = false
-Vue.use( VueAxios, axios )
+Vue.use(VueAxios, axios)
 axios.defaults.withCredentials = true
 
-VeeValidate.Validator.extend( "mobile", {
+VeeValidate.Validator.extend("mobile", {
   getMessage: field => "請輸入正確的手機號碼",
-  validate: ( value ) => {
+  validate: (value) => {
     var str = value
     var result = false
-    if ( str.length > 0 ) {
+    if(str.length > 0) {
       //是否只有數字;
       var patt_mobile = /^[\d]{1,}$/
-      result = patt_mobile.test( str )
+      result = patt_mobile.test(str)
 
-      if ( result ) {
+      if(result) {
         //檢查前兩個字是否為 09
         //檢查前四個字是否為 8869
-        var firstTwo = str.substr( 0, 2 )
-        var firstFour = str.substr( 0, 4 )
-        var afterFour = str.substr( 4, str.length - 1 )
-        if ( firstFour == "8869" ) {
-          $( element ).val( "09" + afterFour )
-          if ( afterFour.length == 8 ) {
+        var firstTwo = str.substr(0, 2)
+        var firstFour = str.substr(0, 4)
+        var afterFour = str.substr(4, str.length - 1)
+        if(firstFour == "8869") {
+          $(element).val("09" + afterFour)
+          if(afterFour.length == 8) {
             result = true
           } else {
             result = false
           }
-        } else if ( firstTwo == "09" ) {
-          if ( str.length == 10 ) {
+        } else if(firstTwo == "09") {
+          if(str.length == 10) {
             result = true
           } else {
             result = false
@@ -61,41 +61,41 @@ VeeValidate.Validator.extend( "mobile", {
     }
     return result
   },
-} )
+})
 
-Vue.component( "loading", VueLoading )
-Vue.filter( 'dollarSign', function ( n ) {
+Vue.component("loading", VueLoading)
+Vue.filter('dollarSign', function(n) {
   return `$${n}`
-} )
-Vue.filter( "numFormat", function ( n ) {
-  var intPart = Number( n ).toFixed( 0 )
+})
+Vue.filter("numFormat", function(n) {
+  var intPart = Number(n).toFixed(0)
   var intPartFormat = intPart
     .toString()
-    .replace( /(\d)(?=(?:\d{3})+$)/g, "$1," )
+    .replace(/(\d)(?=(?:\d{3})+$)/g, "$1,")
   return intPartFormat
-} )
+})
 
 
 
 /* eslint-disable no-new */
-new Vue( {
+new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>',
-} )
+})
 
-router.beforeEach( ( to, from, next ) => {
-  if ( to.meta.requiresAuth ) {
+router.beforeEach((to, from, next) => {
+  if(to.meta.requiresAuth) {
     const api = process.env.APIPATH + "api/user/check"
-    axios.post( api ).then( ( res ) => {
-      if ( !res.data.success ) {
-        next( { path: '/login' } )
+    axios.post(api).then((res) => {
+      if(!res.data.success) {
+        next({ path: '/login' })
       } else {
         next()
       }
-    } )
+    })
   } else {
     next()
   }
-} )
+})

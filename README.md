@@ -8,9 +8,9 @@
 
 ## 2. 資料夾結構說明
 
-`src/main.js` 檔案為入口文件
+`src/main.js` 檔案為入口文件 裡面處理各種插件的配置
 
-`src/router/index.js` 處理路由
+`src/router/index.js` 處理所有路由元件
 
 `src/App.vue` 是整個 vue 實例(下方樣式標籤中放實例需用到的所有樣式)
 
@@ -18,11 +18,11 @@
 
 `src/components/Dashboard.vue` 後台管理系統的主要版型 該頁面包含處理登入的 cookie
 
-`src/components/Navbar.vue` 與 `src/components/Sidebar.vue` 後台管理系統的導覽列與選單
+`src/components/Navbar.vue` 與 `src/components/Sidebar.vue` 後台管理系統的導覽列與左邊選單列
 
-`src/bus.js` 用來給 vue 創建新的原生方法(處理錯誤訊息時需要)
+`src/bus.js` event Bus ，用來給 vue 創建新的原生方法(處理錯誤訊息時需要) 
 
-`src/components/messageAlert.vue` 結合 `bus.js` 檔案 用來處理頁面上提示互動式窗
+`src/components/messageAlert.vue` 結合 `bus.js` 檔案 用來處理頁面上提示訊息的互動式窗
 
 * 客戶端
 
@@ -54,7 +54,8 @@
 
 `src/components/pages/TestOrders.vue` 後台的模擬訂單功能的結帳頁面 路徑為 `/test/test_checkout/:orderId`
 
-`src/components/Pagination.vue` 分頁元件 用於產品/訂單/優惠券管理
+* 其他元件
 
-`src/components/Cards.vue` 模擬訂單的產品卡片元件
+`src/components/Pagination.vue` 分頁元件
 
+`src/components/Cards.vue` 產品卡片元件
